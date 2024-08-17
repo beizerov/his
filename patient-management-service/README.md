@@ -1,3 +1,3 @@
 # his
 
-The Hospital Information System (HIS) leverages a microservices architecture to manage patient records, billing, inventory, notifications, personnel management, and shared utilities. This modular approach enhances scalability, maintainability, and flexibility, enabling seamless integration and efficient healthcare management.
+The Patient Management Service within the Hospital Information System (HIS)  is a microservice that efficiently handles patient records, including personal information and medical history. This service integrates seamlessly with other modules like billing and inventory, providing a scalable and maintainable solution that enhances the overall management of patient data.
