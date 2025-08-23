@@ -1,7 +1,7 @@
 package com.beizerov.his.patientmanagementservice;
 
 import com.beizerov.his.patientmanagementservice.model.Patient;
-import com.beizerov.his.patientmanagementservice.mapper.PatientMapper;
+import com.beizerov.his.patientmanagementservice.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PatientManagementServiceApplicationIntegrationTests {
 
     @Autowired
-    private PatientMapper patientMapper;
+    private PatientRepository patientRepository;
 
     @Test
     public void testFindAllReturnsPatients() {
-        List<Patient> patients = patientMapper.findAll();
+        List<Patient> patients = patientRepository.findAll();
         assertThat(patients).isNotNull();
         assertThat(patients).isNotEmpty();
 
