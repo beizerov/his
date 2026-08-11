@@ -1,5 +1,7 @@
-import org.gradle.api.tasks.testing.Test
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.api.tasks.testing.Test
+import org.gradle.language.jvm.tasks.ProcessResources
 
 plugins {
     id("java")
@@ -9,7 +11,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
 
@@ -33,17 +35,44 @@ configurations.named("integrationTestRuntimeOnly") {
 }
 
 dependencies {
-    add("integrationTestImplementation", project(":patient-management-service"))
+    add(
+        "integrationTestImplementation",
+        project(":patient-management-service")
+    )
 
-    add("integrationTestImplementation", "org.springframework.boot:spring-boot-starter-test")
-    add("integrationTestImplementation", "org.springframework.boot:spring-boot-starter-jdbc")
+    // Spring Boot
+    add(
+        "integrationTestImplementation",
+        "org.springframework.boot:spring-boot-starter-test"
+    )
 
-    add("integrationTestImplementation", "org.testcontainers:junit-jupiter")
-    add("integrationTestImplementation", "org.testcontainers:postgresql")
+    add(
+        "integrationTestImplementation",
+        "org.springframework.boot:spring-boot-starter-jdbc"
+    )
 
-    add("integrationTestImplementation", "io.rest-assured:rest-assured:5.5.5")
+    // Testcontainers
+    add(
+        "integrationTestImplementation",
+        "org.testcontainers:testcontainers-junit-jupiter:2.0.5"
+    )
 
-    add("integrationTestImplementation", "com.h2database:h2:2.1.214")
+    add(
+        "integrationTestImplementation",
+        "org.testcontainers:testcontainers-postgresql:2.0.5"
+    )
+
+    // PostgreSQL JDBC driver
+    add(
+        "integrationTestRuntimeOnly",
+        "org.postgresql:postgresql"
+    )
+
+    // REST API integration tests
+    add(
+        "integrationTestImplementation",
+        "io.rest-assured:rest-assured:5.5.5"
+    )
 }
 
 tasks.register<Test>("integrationTest") {
@@ -55,7 +84,7 @@ tasks.register<Test>("integrationTest") {
 
     useJUnitPlatform()
 
-    shouldRunAfter(tasks.named("test"))
+    shouldRunAfter(tasks.named<Test>("test"))
 }
 
 tasks.named("check") {
@@ -66,6 +95,6 @@ tasks.bootJar {
     enabled = false
 }
 
-tasks.named<Copy>("processIntegrationTestResources") {
+tasks.named<ProcessResources>("processIntegrationTestResources") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
