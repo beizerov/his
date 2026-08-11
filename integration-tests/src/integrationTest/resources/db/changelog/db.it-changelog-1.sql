@@ -1,5 +1,5 @@
 CREATE TABLE patient (
-    id BIGSERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -7,8 +7,14 @@ CREATE TABLE patient (
     address VARCHAR(100) NOT NULL
 );
 
-INSERT INTO patient (first_name, last_name, email, phone_number, address)
+INSERT INTO patient (
+     first_name,
+     last_name,
+     email,
+     phone_number,
+     address
+)
 VALUES
-('John', 'Doe', 'john.doe@example.com', '123-456-7890', '123 Elm Street'),
-('Jane', 'Smith', 'jane.smith@example.com', '234-567-8901', '456 Oak Avenue'),
-('Michael', 'Brown', 'michael.brown@example.com', '345-678-9012', '789 Pine Road');
+    ('John', 'Doe', 'john.doe@example.com', '123-456-7890', '123 Elm Street'),
+    ('Jane', 'Smith', 'jane.smith@example.com', '234-567-8901', '456 Oak Avenue'),
+    ('Michael', 'Brown', 'michael.brown@example.com', '345-678-9012', '789 Pine Road');

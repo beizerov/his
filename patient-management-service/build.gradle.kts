@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 plugins {
     id("java")
     id("org.springframework.boot")
@@ -6,26 +8,23 @@ plugins {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
 
 dependencies {
     implementation(project(":common"))
 
-    // Spring Boot starters - no explicit versions needed, managed by plugin
+    // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5")
     implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // MyBatis
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:4.0.0")
 
     // DB & Liquibase
     implementation("org.postgresql:postgresql")
-    implementation("org.liquibase:liquibase-core")
-    implementation("org.mybatis:mybatis:3.5.13")
-
-    // Lombok
-    compileOnly("org.projectlombok:lombok:1.18.38")
-    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    implementation("org.springframework.boot:spring-boot-starter-liquibase")
 
     // Unit testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")

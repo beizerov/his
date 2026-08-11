@@ -1,15 +1,17 @@
 package com.beizerov.his.patientmanagementservice.model;
 
-import lombok.Builder;
-import lombok.Data;
+import java.util.UUID;
 
-@Data
-@Builder
-public class Patient {
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String address;
+public record Patient (
+    UUID id,
+    String firstName,
+    String lastName,
+    String email,
+    String phoneNumber,
+    String address
+){
+    @Override
+    public String toString() {
+        return "Patient{id=%s}".formatted(id);
+    }
 }
