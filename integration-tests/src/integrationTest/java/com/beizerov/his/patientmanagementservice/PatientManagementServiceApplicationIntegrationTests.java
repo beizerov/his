@@ -25,7 +25,7 @@ class PatientManagementServiceApplicationIntegrationTests {
     private PatientRepository patientRepository;
 
     @Container
-    static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:17");
+    static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:18");
 
     @DynamicPropertySource
     static void configureDatasource(DynamicPropertyRegistry registry) {
