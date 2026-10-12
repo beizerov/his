@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Implementation of the PatientRepository interface using MyBatis.
+ */
 @Repository
 @RequiredArgsConstructor
 public class PatientRepositoryImpl implements PatientRepository {
